@@ -24,7 +24,9 @@ class App extends React.Component() {
         </header>
         {
           this.state.birds.map((bird) => {
-            return { birds.name } : {birds.number_of_eggs} : {birds.flies} : {birds.title}
+            return <div>
+              {bird.name} : {bird.number_of_eggs} : {bird.flies} : {bird.title}
+            </div>
           })
         }
       </div>
