@@ -21,8 +21,8 @@ export default class App extends Component {
                     <Router>
                         <main>
                             <div className='sidebar'>
-                                <Link to='create'>Create</Link>
-                                <Link to='list'>List</Link>
+                                <Link to='/create'>Create</Link>
+                                <Link to='/'>List</Link>
                             </div>
                             <div className='content'>
                                 <Switch>

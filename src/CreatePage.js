@@ -16,7 +16,10 @@ export default class CreatePage extends Component {
 
         await createBird({
             name: this.state.name,
-            numberOfEggs: this.state.numberOfEggs
+            number_of_eggs: this.state.numberOfEggs,
+            flies: this.state.flies,
+            color: this.state.color,
+            user_id: 1
         });
         this.setState({
             name: '',
@@ -63,10 +66,10 @@ export default class CreatePage extends Component {
                         <input type='radio' value='true' onClick={this.handleIfFliesChange} />
                     </label>
                     <select onChange={this.handleColorChange}>Color
-                        <option value={this.state.color}>Blue</option>
-                        <option value={this.state.color}>Red</option>
-                        <option value={this.state.color}>Black</option>
-                        <option value={this.state.color}>White</option>
+                        <option value='blue'>Blue</option>
+                        <option value='red'>Red</option>
+                        <option value='black'>Black</option>
+                        <option value='white'>White</option>
                     </select>
                     <button>Create new bird</button>
                 </form>
