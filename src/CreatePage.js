@@ -1,32 +1,50 @@
 import React, { Component } from 'react'
 import './App.css';
-import { createBird } from './birds-api.js';
+import { createBird, fetchRescues } from './birds-api.js';
 
 export default class CreatePage extends Component {
 
     state = {
         name: '',
-        numberOfEggs: 1,
+        numberOfEggs: 0,
         flies: true,
-        color: ''
+        color: '',
+        rescues: []
+    }
+
+    componentDidMount = async () => {
+        const rescuesData = await fetchRescues();
+
+        this.setState({
+            rescues: rescuesData.body
+        })
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        await createBird({
-            name: this.state.name,
-            number_of_eggs: this.state.numberOfEggs,
-            flies: this.state.flies,
-            color: this.state.color,
-            user_id: 1
-        });
-        this.setState({
-            name: '',
-            numberOfEggs: 3,
-            flies: true,
-            color: ''
-        })
+        try {
+            await createBird({
+                name: this.state.name,
+                number_of_eggs: this.state.numberOfEggs,
+                flies: this.state.flies,
+                color: this.state.color,
+                rescue_id: this.state.rescue_id
+            });
+
+            this.setState({
+                name: '',
+                numberOfEggs: 0,
+                flies: true,
+                color: '',
+                rescue_id: 1
+            });
+
+            this.props.history.push('/');
+
+        } catch (e) {
+            console.log(e.message);
+        }
     }
 
     handleNameChange = e => {
@@ -38,7 +56,7 @@ export default class CreatePage extends Component {
     }
 
     handleIfFliesChange = e => {
-        this.setState({ flies: e.target.value });
+        this.setState({ flies: e.target.value === 'yes' ? true : false });
 
     }
 
@@ -46,32 +64,53 @@ export default class CreatePage extends Component {
         this.setState({ color: e.target.value });
     }
 
+    handleRescueChange = e => {
+        this.setState({ rescue_id: e.target.value });
+    }
+
     render() {
         return (
             <div className='content'>
                 <h2>
-                    CREATE!
+                    Enter Bird Found
                 </h2>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Name
+                        Bird Type:
                         <input onChange={this.handleNameChange} value={this.state.name} />
                     </label>
                     <label>
-                        Number of Eggs
+                        Number of Eggs Found:
                         <input type='number' onChange={this.handleEggChange} value={this.state.numberOfEggs} />
                     </label>
-                        Does it fly?
+                    <section>Is it able to fly?
                     <label>
-                        <input type='radio' value='true' onClick={this.handleIfFliesChange} />
+                            Yes
+                        <input type='radio' value='yes' onChange={this.handleIfFliesChange} />
+                        </label>
+                        <label>
+                            No
+                        <input type='radio' value='no' onChange={this.handleIfFliesChange} />
+                        </label>
+                    </section>
+                    <label>
+                        Color:
+                        <select onChange={this.handleColorChange}>
+                            <option value='blue'>Blue</option>
+                            <option value='red'>Red</option>
+                            <option value='black'>Black</option>
+                            <option value='white'>White</option>
+                        </select>
                     </label>
-                    <select onChange={this.handleColorChange}>Color
-                        <option value='blue'>Blue</option>
-                        <option value='red'>Red</option>
-                        <option value='black'>Black</option>
-                        <option value='white'>White</option>
-                    </select>
-                    <button>Create new bird</button>
+                    <label>
+                        Preferred Rescue Sanctuary:
+                        <select onChange={this.handleRescueChange} value={this.state.rescue}>
+                            {
+                                this.state.rescues.map((rescue) => <option value={rescue.id} key={rescue.id}>{rescue.name}</option>)
+                            }
+                        </select>
+                    </label>
+                    <button>Submit new bird</button>
                 </form>
             </div >
         )

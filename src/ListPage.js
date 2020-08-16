@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { fetchBirds } from './birds-api.js'
+import { fetchBirds } from './birds-api.js';
 
 class ListPage extends React.Component {
 
@@ -18,27 +18,32 @@ class ListPage extends React.Component {
 
   render() {
     return (
-      <div className="birds" >
-        <h2>Birds:</h2>
-        {
-          this.state.birds.map((bird) => {
-            return <div className='bird' to={`/detail/${bird.id}`} key={`${bird.id}-${bird.name}`}>
-              <p>
-                {bird.name}
-              </p>
-              <p>
-                {bird.number_of_eggs}
-              </p>
-              <p>
+      <>
+        <h2>Birds</h2>
+        <div className="birds" >
+          {
+            this.state.birds.map((bird) => {
+              return <div className='bird' to={`/detail/${bird.id}`} key={`${bird.id}-${bird.name}`}>
+                <p>
+                  {bird.name}
+                </p>
+                <p>
+                  Number of Eggs: <br />
+                  {bird.number_of_eggs}
+                </p>
+                <p>
+                  Able to fly:
                 {bird.flies}
-              </p>
-              <p>
-                {bird.title}
-              </p>
-            </div>
-          })
-        }
-      </div >
+                </p>
+                <p>
+                  Preferred Rescue Sanctuary:
+                {bird.rescue_name}
+                </p>
+              </div>
+            })
+          }
+        </div >
+      </>
     );
   }
 }
