@@ -19,7 +19,7 @@ class ListPage extends React.Component {
   render() {
     return (
       <>
-        <h2>Birds</h2>
+        <h2>Rescue Birds</h2>
         <div className="birds" >
           {
             this.state.birds.map((bird) => {

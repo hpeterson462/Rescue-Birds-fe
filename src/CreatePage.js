@@ -40,7 +40,7 @@ export default class CreatePage extends Component {
                 rescue_id: 1
             });
 
-            this.props.history.push('/');
+            this.props.history.push('/detail');
 
         } catch (e) {
             console.log(e.message);
