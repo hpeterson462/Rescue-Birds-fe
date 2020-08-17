@@ -27,10 +27,10 @@ a {
 }
 
 a:hover {
-  background-color: var(--color2);
   cursor: pointer;
   border-radius: 5px;
   height: 35px;
+  color: var(--color2);
 }
 
 form {
@@ -55,6 +55,7 @@ input, select, button {
 
 button {
   padding: 10px;
+  margin: 5px;
 }
 
 button:hover{
@@ -122,6 +123,20 @@ main {
   display: flex;
   flex-direction: column;
   background-color: var(--color4);
+  border-right: solid 1px var(--color3);
+}
+
+.update-detail-description, .form-section{
+  background-color: var(--color2);
+  border: solid 1px var(--color3);
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+}
+
+h3{
+  color: var(--color3);
+  font-size: 1.5em;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Alata&family=Amatic+SC:wght@400;700&family=Merriweather&family=Montserrat&family=PT+Sans&family=PT+Sans+Narrow&display=swap');

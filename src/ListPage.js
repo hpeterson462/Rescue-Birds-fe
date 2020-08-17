@@ -24,22 +24,24 @@ class ListPage extends React.Component {
         <div className="birds">
           {
             this.state.birds.map((bird) => {
-              return <Link className='bird' to={`/detail/${bird.id}`} key={`${bird.id}-${bird.name}`}>
-                <p>
-                  {bird.name}
-                </p>
-                <p>
-                  Number of Eggs: <br />
-                  {bird.number_of_eggs}
-                </p>
-                <p>
-                  Able to fly: <br />
-                  {bird.flies ? 'yes' : 'no'}
-                </p>
-                <p>
-                  Preferred Rescue Sanctuary: <br />
-                  {bird.rescue_name}
-                </p>
+              return <Link to={`/detail/${bird.id}`} key={`${bird.id}-${bird.name}`}>
+                <div className="bird">
+                  <p>
+                    {bird.name}
+                  </p>
+                  <p>
+                    Number of Eggs: <br />
+                    {bird.number_of_eggs}
+                  </p>
+                  <p>
+                    Able to fly: <br />
+                    {bird.flies ? 'yes' : 'no'}
+                  </p>
+                  <p>
+                    Preferred Rescue Sanctuary: <br />
+                    {bird.rescue_name}
+                  </p>
+                </div>
               </Link>
             })
           }

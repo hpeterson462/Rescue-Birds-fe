@@ -91,52 +91,54 @@ export default class DetailPage extends Component {
         console.log(this.state.rescues);
         return (
             <div>
-                <div>
+                <div className="update-detail-description">
                     You rescued a {this.state.color} {this.state.name} that was found with {this.state.numberOfEggs} egg(s). It will be placed at {this.state.rescue}. Thank you for your help!
                 </div>
-                <h3>Update found bird?</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Bird Type:
+                <section className="form-section">
+                    <h3>Update this found bird?</h3>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Bird Type:
                         <input onChange={this.handleNameChange} value={this.state.name} />
-                    </label>
-                    <label>
-                        Number of Eggs Found:
+                        </label>
+                        <label>
+                            Number of Eggs Found:
                         <input type='number' onChange={this.handleEggChange} value={this.state.numberOfEggs} />
-                    </label>
+                        </label>
                         Is it able to fly?
                     <label>
-                        Yes
+                            Yes
                         <input type='radio' value='yes' onChange={this.handleIfFliesChange} />
-                    </label>
-                    <label>
-                        No
+                        </label>
+                        <label>
+                            No
                         <input type='radio' value='no' onChange={this.handleIfFliesChange} />
-                    </label>
-                    <label>
-                        Color:
+                        </label>
+                        <label>
+                            Color:
                         <select onChange={this.handleColorChange} value={this.state.color}>
-                            <option value='blue'>Blue</option>
-                            <option value='red'>Red</option>
-                            <option value='black'>Black</option>
-                            <option value='white'>White</option>
-                            <option value='yellow'>Yellow</option>
-                            <option value='green'>Green</option>
-                            <option value='brown'>Brown</option>
-                            <option value='orange'>Orange</option>
-                        </select>
-                    </label>
-                    <label>
-                        Preferred Rescue Sanctuary:
+                                <option value='blue'>Blue</option>
+                                <option value='red'>Red</option>
+                                <option value='black'>Black</option>
+                                <option value='white'>White</option>
+                                <option value='yellow'>Yellow</option>
+                                <option value='green'>Green</option>
+                                <option value='brown'>Brown</option>
+                                <option value='orange'>Orange</option>
+                            </select>
+                        </label>
+                        <label>
+                            Preferred Rescue Sanctuary:
                         <select onChange={this.handleRescueChange} value={this.state.rescue_name}>
-                            {
-                                this.state.rescues.map((rescue) => <option value={rescue.id} key={rescue.rescue_id}>{rescue.rescue_name}</option>)
-                            }
-                        </select>
-                    </label>
-                    <button>Update bird found</button>
-                    <button onClick={this.handleDelete}>Delete bird</button>
-                </form>
+                                {
+                                    this.state.rescues.map((rescue) => <option value={rescue.id} key={rescue.rescue_id}>{rescue.rescue_name}</option>)
+                                }
+                            </select>
+                        </label>
+                        <button>Update bird found</button>
+                        <button onClick={this.handleDelete}>Delete bird</button>
+                    </form>
+                </section>
             </div>
         )
     }
