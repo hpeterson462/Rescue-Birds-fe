@@ -40,7 +40,7 @@ export default class CreatePage extends Component {
                 rescue_id: 1
             });
 
-            this.props.history.push('/detail');
+            this.props.history.push('/');
 
         } catch (e) {
             console.log(e.message);
@@ -100,13 +100,17 @@ export default class CreatePage extends Component {
                             <option value='red'>Red</option>
                             <option value='black'>Black</option>
                             <option value='white'>White</option>
+                            <option value='yellow'>Yellow</option>
+                            <option value='green'>Green</option>
+                            <option value='brown'>Brown</option>
+                            <option value='orange'>Orange</option>
                         </select>
                     </label>
                     <label>
                         Preferred Rescue Sanctuary:
                         <select onChange={this.handleRescueChange} value={this.state.rescue}>
                             {
-                                this.state.rescues.map((rescue) => <option value={rescue.id} key={rescue.id}>{rescue.name}</option>)
+                                this.state.rescues.map((rescue) => <option value={rescue.id} key={rescue.id}>{rescue.rescue_name}</option>)
                             }
                         </select>
                     </label>

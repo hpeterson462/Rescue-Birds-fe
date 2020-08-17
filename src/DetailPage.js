@@ -4,22 +4,19 @@ import { fetchBird, deleteBird, updateBird, fetchRescues } from './birds-api.js'
 export default class DetailPage extends Component {
 
     state = {
-        bird: {
-            bird: {},
-            name: '',
-            numberOfEggs: 0,
-            flies: false,
-            color: '',
-            rescue_id: 1,
-            rescues: []
-        }
+        bird: {},
+        name: '',
+        numberOfEggs: 0,
+        flies: false,
+        color: '',
+        rescue_id: 1,
+        rescues: []
     }
 
     componentDidMount = async () => {
         const data = await fetchBird(this.props.match.params.id)
         const rescuesData = await fetchRescues();
-
-        const matchingRescue = rescuesData.body.find(rescue => rescue.name = data.body.rescue_name);
+        const matchingRescue = rescuesData.body.find(rescue => rescue.id === data.body.rescue_name);
 
         this.setState({
             rescues: rescuesData.body,
@@ -28,7 +25,7 @@ export default class DetailPage extends Component {
             number_of_eggs: data.body.numberOfEggs,
             flies: data.body.flies,
             color: data.body.color,
-            rescue: matchingRescue.id
+            rescue: matchingRescue.rescue_name
         })
     }
 
@@ -60,6 +57,7 @@ export default class DetailPage extends Component {
         } catch (e) {
             console.log(e.message);
         }
+        this.props.history.push('/');
     }
 
     handleNameChange = e => {
@@ -90,12 +88,13 @@ export default class DetailPage extends Component {
     }
 
     render() {
+        console.log(this.state.rescues);
         return (
             <div>
                 <div>
-                    Your rescued bird, {this.state.bird.name}, that was found with {this.state.bird.numberOfEggs} eggs and is {this.state.bird.color} in color. It will be placed at {this.state.bird.rescue}. Thank you for your help!
+                    You rescued a {this.state.color} {this.state.name} that was found with {this.state.numberOfEggs} egg(s). It will be placed at {this.state.rescue}. Thank you for your help!
                 </div>
-                <h3>Update bird found?</h3>
+                <h3>Update found bird?</h3>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Bird Type:
@@ -116,23 +115,27 @@ export default class DetailPage extends Component {
                     </label>
                     <label>
                         Color:
-                        <select onChange={this.handleColorChange}>
+                        <select onChange={this.handleColorChange} value={this.state.color}>
                             <option value='blue'>Blue</option>
                             <option value='red'>Red</option>
                             <option value='black'>Black</option>
                             <option value='white'>White</option>
-                            <option value='gold'>gold</option>
+                            <option value='yellow'>Yellow</option>
+                            <option value='green'>Green</option>
+                            <option value='brown'>Brown</option>
+                            <option value='orange'>Orange</option>
                         </select>
                     </label>
                     <label>
                         Preferred Rescue Sanctuary:
-                        <select onChange={this.handleRescueChange} value={this.state.rescue}>
+                        <select onChange={this.handleRescueChange} value={this.state.rescue_name}>
                             {
-                                this.state.rescues.map((rescue) => <option value={rescue.id} key={rescue.id}>{rescue.name}</option>)
+                                this.state.rescues.map((rescue) => <option value={rescue.id} key={rescue.rescue_id}>{rescue.rescue_name}</option>)
                             }
                         </select>
                     </label>
                     <button>Update bird found</button>
+                    <button onClick={this.handleDelete}>Delete bird</button>
                 </form>
             </div>
         )

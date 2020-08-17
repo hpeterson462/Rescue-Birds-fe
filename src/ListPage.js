@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { fetchBirds } from './birds-api.js';
+import { Link } from 'react-router-dom';
 
 class ListPage extends React.Component {
 
@@ -20,10 +21,10 @@ class ListPage extends React.Component {
     return (
       <>
         <h2>Rescue Birds</h2>
-        <div className="birds" >
+        <div className="birds">
           {
             this.state.birds.map((bird) => {
-              return <div className='bird' to={`/detail/${bird.id}`} key={`${bird.id}-${bird.name}`}>
+              return <Link className='bird' to={`/detail/${bird.id}`} key={`${bird.id}-${bird.name}`}>
                 <p>
                   {bird.name}
                 </p>
@@ -32,14 +33,14 @@ class ListPage extends React.Component {
                   {bird.number_of_eggs}
                 </p>
                 <p>
-                  Able to fly:
-                {bird.flies}
+                  Able to fly: <br />
+                  {bird.flies ? 'yes' : 'no'}
                 </p>
                 <p>
-                  Preferred Rescue Sanctuary:
-                {bird.rescue_name}
+                  Preferred Rescue Sanctuary: <br />
+                  {bird.rescue_name}
                 </p>
-              </div>
+              </Link>
             })
           }
         </div >

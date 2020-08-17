@@ -28,7 +28,7 @@ export function deleteBird(id) {
 }
 
 export function updateBird(id, updatedBird) {
-    return request.put(`${URL}/birds/${id}, updatedBirds`);
+    return request.put(`${URL}/birds/${id}`, updatedBird);
 }
 
 export function createBird(birdData) {
